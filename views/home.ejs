@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdn.socket.io/4.1.2/socket.io.min.js"
+      integrity="sha384-toS6mmwu70G0fw54EGlWWeA4z3dyJ+dlXBtSURSKN4vyRFOcxd3Bzjj/AoOwY+Rg"
+      crossorigin="anonymous"
+    ></script>
+    <title>Socket IO - NodeJs/ExpressJs</title>
+  </head>
+  <body>
+    <input type="text" name="" class="message" id="messageInput" />
+    <button onclick="sendMessage()">Send Message</button>
+    <h1 id="messageTag"></h1>
+    <script>
+      const socket = io("http://localhost:3001");
+      socket.on("connection");
+
+      socket.on("message", (data) => {
+        document.getElementById("messageTag").innerHTML = data;
+      });
+
+      const sendMessage = () => {
+        const inputValue = document.getElementById("messageInput").value;
+        if (inputValue.length > 0) {
+          socket.emit("message", inputValue);
+        } else {
+          alert("Input cannot be empty");
+        }
+      };
+    </script>
+  </body>
+</html>
